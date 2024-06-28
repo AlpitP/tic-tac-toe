@@ -1,23 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import TicTacToe from "./component/TicTacToe";
+import Button from "./shared/Button";
+import TicTacToeBot from "./component/TicTacToeBot";
 
 function App() {
+  const [gameType, setGameType] = useState("");
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Tic-Tac-Toe</h1>
+      {!gameType && (
+        <>
+          <Button
+            onClick={() => setGameType("twoPlayer")}
+            style={{ fontSize: 20, margin: 20 }}
+          >
+            2 player
+          </Button>
+          <Button onClick={() => setGameType("bot")} style={{ fontSize: 20 }}>
+            Bot
+          </Button>
+        </>
+      )}
+      {gameType === "twoPlayer" && <TicTacToe />}
+      {gameType === "bot" && <TicTacToeBot />}
     </div>
   );
 }
